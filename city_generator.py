@@ -5,6 +5,7 @@ import random
 import math
 import time
 import thread
+import city_functions
 mc = Minecraft.create()
 
 xshard = 0
@@ -27,51 +28,6 @@ grid_start = random.randint(0,len(grid_coords)-1)
 xshard = grid_coords[grid_start][0]
 zshard = grid_coords[grid_start][1]
 
-#build the roads in a grid
-
-def full_flatten():
-    #mc.postToChat("Full Flatten in Process")
-    mc.setBlocks(-128,-64,-128,128,128,128,block.AIR,0)
-    #mc.postToChat("Full Flatten Complete")
-
-def up_flatten():
-    #mc.postToChat("Up Flatten in Process")
-    mc.setBlocks(-128,0,-128,128,128,128,block.AIR,0)
-    #mc.postToChat("Up Flatten in Complete")
-
-def foundations():
-    #mc.postToChat("Foundation Building in Process")
-    mc.setBlocks(-128,-1,-128,128,0,128,block.STONE,0)
-    #mc.postToChat("Foundation Building Complete")
-
-def skyscraper(x,z,floors):
-    #mc.postToChat("Skyscraper Building in Process")
-    blocks = [ block.STONE, block.BRICK_BLOCK, block.OBSIDIAN, block.SANDSTONE, block.STONE_BRICK]
-    b = blocks[random.randint(0,len(blocks)-1)]
-    a = block.AIR
-    g = block.GLASS_PANE
-    mc.setBlocks(x,1,z,x+grid_size-3,(floors*3)+1,z+grid_size-3,b)
-
-    #hollow out floors
-    #mc.postToChat("Hollow out floors")
-    for y in range(0,floors):
-        mc.setBlocks(x,(y*3)+1,z,x+grid_size-3,(y*3)+2,z+grid_size-3,a)
-
-    #adding glass
-        #mc.postToChat("Adding Glass")
-    for y in range(0,floors):
-        mc.setBlocks(x+grid_size-3,(y*3)+1,z,x+grid_size-3,(y*3)+2,z+grid_size-3,g)
-    for y in range(0,floors):
-        mc.setBlocks(x+grid_size-3,(y*3)+1,z,x+grid_size-3,(y*3)+2,z+grid_size-3,g)
-        mc.setBlocks(x,(y*3)+1,z,x,(y*3)+2,z+grid_size-3,g)
-        mc.setBlocks(x,(y*3)+1,z,x+grid_size-3,(y*3)+2,z,g)
-        mc.setBlocks(x,(y*3)+1,z+grid_size-3,x+grid_size-3,(y*3)+2,z+grid_size-3,g)
-        mc.setBlocks(x,(y*3)+1,z,x,(y*3)+2,z,b)
-        mc.setBlocks(x+grid_size-3,(y*3)+1,z,x+grid_size-3,(y*3)+2,z,b)
-        mc.setBlocks(x,(y*3)+1,z+grid_size-3,x,(y*3)+2,z+grid_size-3,b)
-        mc.setBlocks(x+grid_size-3,(y*3)+1,z+grid_size-3,x+grid_size-3,(y*3)+2,z+grid_size-3,b)
-
-    #mc.postToChat("Skyscraper Building Complete")
 
 def roads():
     #mc.postToChat("Road laying in Process")
@@ -91,7 +47,7 @@ def skyscrapers():
          for z in range(-128,128):
              if(x % grid_size == 0 and z % grid_size == 0):
                  floors = random.randint(3,12)
-                 skyscraper(x+2,z+2,floors)
+                 skyscraper(x+2,1,z+2,grid_size-3,floors)
                  num+=1
                  mc.postToChat("Skyscraper  number " + str(num) + " complete")
 
@@ -153,8 +109,8 @@ def noFlying():
             mc.postToChat("No flying!!!")
 
 #full_flatten
-up_flatten()
-foundations()
+#up_flatten()
+#foundations()
 roads()
 
 skyscrapers()
