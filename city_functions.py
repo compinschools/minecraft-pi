@@ -15,14 +15,14 @@ def full_flatten():
 
 def up_flatten():
     
-    #mc.postToChat("Up Flatten in Process")
+    mc.postToChat("Up Flatten in Process")
     mc.setBlocks(-128,1,-128,128,128,128,block.AIR,0)
-    #mc.postToChat("Up Flatten in Complete")
+    mc.postToChat("Up Flatten in Complete")
 
 def foundations():
-    #mc.postToChat("Foundation Building in Process")
+    mc.postToChat("Foundation Building in Process")
     mc.setBlocks(-128,0,-128,128,0,128,block.STONE,0)
-    #mc.postToChat("Foundation Building Complete")
+    mc.postToChat("Foundation Building Complete")
 
 def skyscraper(x,y,z,size,floors):
     #mc.postToChat("Skyscraper Building in Process")

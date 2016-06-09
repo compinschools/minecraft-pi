@@ -33,11 +33,13 @@ def roads():
     mc.postToChat("Road laying in Process")
     for x in range(-128,128):
         if(x % grid_size == 0):
-            mc.setBlocks(x,0,-128,x+1,0,128,block.DIAMOND_BLOCK)
+            mc.setBlocks(x   ,0,-128,x+1,0,128,block.WOOL.id,15)
+
+    #mc.setBlocks(-128,0,-128,128,10,128,block.TNT.id)	
 	    #print("Setting Blocks on the ",x)
     for z in range(-128,128):
         if(z % grid_size == 0):
-            mc.setBlocks(-128,0,z,128,0,z+1,block.DIAMOND_BLOCK)
+            mc.setBlocks(-128,0,z   ,128,0,z+1,block.WOOL.id,15)
 	    #print(z)
     mc.postToChat("Road laying complete")
 
@@ -117,11 +119,12 @@ def noFlying():
 #full_flatten()
 up_flatten()
 foundations()
+time.sleep(5)
 roads()
 
 skyscrapers()
-#garden()
-#shard()
+garden()
+shard()
 #thread.start_new_thread(distance,())
 #thread.start_new_thread(noFlying,())
 
